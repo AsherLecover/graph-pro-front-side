@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { AuthService } from '../../servises/auth.service';
+
 
 
 @Component({
@@ -14,6 +16,7 @@ export class SignInComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private authServise: AuthService
 
   ) { }
 
@@ -30,10 +33,21 @@ export class SignInComponent implements OnInit {
   onSubmit() {
     console.log(7687687687687);
     console.log(this.signInForm.value);
+    this.signin()
     
     if (this.signInForm.valid) {
       this.submitted = true;
     }
   }
+
+  signin() {
+    this.authServise.signin(this.signInForm.value.email, this.signInForm.value.password).subscribe( data => {
+      console.log(data);
+    })
+    
+    }
+    
+    
+  
 
 }

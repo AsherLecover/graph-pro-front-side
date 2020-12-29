@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
             <h1 class="text-center login-title">Sign up to continue </h1>
@@ -7,7 +7,7 @@
                     alt="">
 
 
-                <form  [formGroup]="registerForm" (ngSubmit)="onSubmit()"  class="form-signin">
+                <form  [formGroup]="registerForm"  class="form-signin">
 
                 <input  formControlName="username"  type="text" class="form-control" placeholder="User Name" required autofocus>
 
@@ -32,4 +32,88 @@
 
 
 
+
+ -->
+
+ <div id="login-box">
+    <div class="left">
+      <h1>Sign up</h1>
+      
+      <form  [formGroup]="registerForm"  class="form-signin">
+
+      <input  formControlName="username" type="text" name="username" placeholder="Username" 
+      [ngClass]="{'has-error' :
+         registerForm.get('username').errors &&
+        (registerForm.get('username').dirty)}" />
+
+
+        <span *ngIf="registerForm.get('username').errors &&
+        (registerForm.get('username').dirty)">
+    
+          <span style="color: red;" *ngIf="registerForm.get('username').errors.required">
+            זהו שדה חובה
+          </span>
+    
+          <span style="color: red;" *ngIf="registerForm.get('username').errors.minlength">
+            שם פרטי חייב להיות לפחות 2 אותיות
+          </span>
+        </span>
+
+      <input  formControlName="email" type="text" name="email" placeholder="E-mail" 
+      [ngClass]="{'has-error' :
+         registerForm.get('email').errors &&
+         (registerForm.get('email').dirty)}" />
+
+         <span *ngIf="registerForm.get('email').errors &&
+         (registerForm.get('email').dirty)">
+     
+           <span style="color: red;" *ngIf="registerForm.get('email').errors.required">
+             זהו שדה חובה
+           </span>
+           <span style="color: red;" *ngIf="registerForm.get('email').errors.email">
+             כתובת מייל לא חוקית
+           </span>
+         </span>
+
+
+      <input  formControlName="password" type="password" name="password" placeholder="Password" 
+      [ngClass]="{'has-error' :
+         registerForm.get('password').errors &&
+         (registerForm.get('password').dirty)}"
+      />
+
+      <span *ngIf="registerForm.get('password').errors && (registerForm.get('password').dirty)">
+
+        <span style="color: red;" *ngIf="registerForm.get('password').errors.required">
+          זהו שדה חובה
+        </span>
+        <span style="color: red;" *ngIf="registerForm.get('password').errors.minlength">
+          סיסמה חייבת להיות בעלת 6 תווים
+        </span>
+        <br>
+        <span style="color: red;" *ngIf="registerForm.get('password').errors.pattern">
+          סיסמה חייבת להיות לפחות בעלת אות גדולה אות קטנה ומספר.   
+        </span>
+      </span>
+      
+      <span style="color: red;" *ngIf="errorFromServerEmailExists.length > 0">
+        {{errorFromServerEmailExists}}
+        <br>
+      </span>
+
+      
+      <input [disabled]="!registerForm.valid" (click)="onSubmit()" type="submit" name="signup_submit" value="Sign me up" />
+      </form>
+    </div>
+    
+    <div class="right">
+        <span class="loginwith">Sign in with<br />social network</span>
+        
+        <button class="social-signin facebook">Log in with facebook</button>
+        <button class="social-signin twitter">Log in with Twitter</button>
+        <button class="social-signin google">Log in with Google+</button>
+        <a routerLink="/sign-in" class="text-center new-account">Alredy Have an account </a>
+    </div>
+    <div class="or">OR</div>
+  </div>
 

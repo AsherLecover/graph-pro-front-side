@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
             <h1 class="text-center login-title">Sign in to continue</h1>
@@ -6,7 +6,7 @@
                 <img class="profile-img" src="https://picpicture.herokuapp.com/private-area/getFile/default-avatar"
                     alt="">
 
-                <form  [formGroup]="signInForm" (ngSubmit)="onSubmit()" class="form-signin">
+                <form  [formGroup]="signInForm"  class="form-signin">
 
                 <input   formControlName="email" type="text" class="form-control" placeholder="Email" required autofocus>
 
@@ -25,4 +25,67 @@
             <a routerLink="/sign-up" class="text-center new-account">Create an account </a>
         </div>
     </div>
-</div>
+</div> -->
+
+<div id="login-box">
+    <div class="left">
+      <h1>Sign in</h1>
+
+      
+      <form  [formGroup]="signInForm"  class="form-signin">
+
+      <input  formControlName="email" type="text" name="email" placeholder="E-mail" 
+      [ngClass]="{'has-error' :
+         signInForm.get('email').errors &&
+         (signInForm.get('email').dirty)}" />
+
+         <span *ngIf="signInForm.get('email').errors &&
+         (signInForm.get('email').dirty)">
+     
+           <span style="color: red;" *ngIf="signInForm.get('email').errors.required">
+             זהו שדה חובה
+           </span>
+           <span style="color: red;" *ngIf="signInForm.get('email').errors.email">
+             כתובת מייל לא חוקית
+           </span>
+         </span>
+
+
+      <input  formControlName="password" type="password" name="password" placeholder="Password" 
+      [ngClass]="{'has-error' :
+         signInForm.get('password').errors &&
+         (signInForm.get('password').dirty)}"
+      />
+
+      <span *ngIf="signInForm.get('password').errors && (signInForm.get('password').dirty)">
+
+        <span style="color: red;" *ngIf="signInForm.get('password').errors.required">
+          זהו שדה חובה
+        </span>
+        <span style="color: red;" *ngIf="signInForm.get('password').errors.minlength">
+          סיסמה חייבת להיות בעלת 6 תווים
+        </span>
+        <br>
+        <span style="color: red;" *ngIf="signInForm.get('password').errors.pattern">
+          סיסמה חייבת להיות לפחות בעלת אות גדולה אות קטנה ומספר.   
+        </span>
+      </span>
+      
+      
+
+      
+      <input [disabled]="!signInForm.valid" (click)="onSubmit()" type="submit" name="signup_submit" value="Sign me up" />
+      </form>
+    </div>
+    
+    <div class="right">
+      <span class="loginwith">Sign in with<br />social network</span>
+      
+      <button class="social-signin facebook">Log in with facebook</button>
+      <button class="social-signin twitter">Log in with Twitter</button>
+      <button class="social-signin google">Log in with Google+</button>
+      <a routerLink="/sign-up" class="text-center new-account">Create an account </a>
+    </div>
+    <div class="or">OR</div>
+  </div>
+

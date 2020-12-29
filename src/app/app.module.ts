@@ -8,6 +8,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 
 @NgModule({
@@ -16,13 +19,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HedderComponent,
     FooterComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
