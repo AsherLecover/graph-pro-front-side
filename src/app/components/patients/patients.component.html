@@ -1,16 +1,35 @@
-<p>patients works!</p>
 <div class="continer">
     <h1>Dear Medical Doctor Welcome</h1>
     <h2>In this area you can follow your patients and check their metrics</h2><br><br>
     <h3>Please select the patient you want to see</h3><br>
 
-    <div  class="select-area">
-       
-        <select  (change)="selectPatient($event)" class="select-css">
-          
+    <div class="select-area">
+
+        <select (change)="selectPatient($event)" class="select-css">
             <option> Select patient</option>
-            <option  *ngFor="let patient of PatientList | async " value={{patient.id}}>{{patient.username}}</option>
-          
-          </select>
+            <option *ngFor="let patient of PatientList | async " value={{patient.id}}>{{patient.username}}</option>
+
+        </select>
+
+        <select (change)="selectParam($event)" class="select-css">
+            <option> Select option</option>
+            <option *ngFor="let param of madicalsParams">{{param}}</option>
+
+        </select>
+
+        <form [formGroup]="myForm">
+            <input  id="date" type="date" formControlName="dateOfBirth">
+        </form>
+
+
+
+
+
+        <button (click)="sendReq()" type="button" class="btn btn-info">send</button>
+
+        <p>{{dateTest}}</p>
+
+
+
     </div>
 </div>

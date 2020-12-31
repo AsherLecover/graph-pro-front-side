@@ -11,14 +11,20 @@ export class PatientsService {
 
 
 
+
   constructor(private http: HttpClient) { }
 
-  getAllPatients(){
+  getAllPatients() {
     return this.http.get(`${environment.apiUrl}/patients`)
   }
 
   getUserMedicalData(patientId) {
     return this.http.get(`${environment.apiUrl}/main-data/${patientId}`)
+
+  }
+
+  getUserMedicalDataByParam(patientId, param) {
+    return this.http.get(`${environment.apiUrl}/main-data/${patientId}/${param}`)
 
   }
 }

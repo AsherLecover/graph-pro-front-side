@@ -50,6 +50,7 @@ export class SignUpComponent implements OnInit {
   }
 
   signup() {
+    console.log('register datails: ', this.registerForm.value);
     this.authServise
       .signup(
         this.registerForm.value.username,
@@ -62,7 +63,7 @@ export class SignUpComponent implements OnInit {
             console.log('data:::', data);
             
             this.submitted = true;
-            console.log('register datails: ', this.registerForm.value);
+
             if(data){
               this.router.navigate(["/sign-in"])
             }
