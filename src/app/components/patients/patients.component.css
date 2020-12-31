@@ -10,12 +10,13 @@ h3 {
   margin-left: 10%;
 }
 
-.select-area {
-  margin-left: 11%;
-}
+
 
 .select-area {
   display: flex;
+  margin-left: 11%;
+  justify-content: space-between;
+  width: 40%;
 }
 
 /* class applies to select element itself, not a wrapper element */

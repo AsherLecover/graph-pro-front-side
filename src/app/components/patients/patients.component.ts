@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { PatientsService } from '../../servises/patients.service'
 import { MedicalMainDataModel } from '../../models/medical-main-data-model'
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
 
@@ -18,7 +18,6 @@ export class PatientsComponent implements OnInit {
     'MovementSlow',
     'ObjectDistance',
     'State',
-    'TimeStamp',
     'algorithm_state',
     'average_apnea',
     'cartridge_is_replace',
@@ -51,7 +50,9 @@ export class PatientsComponent implements OnInit {
 
   ngOnInit(): void {
     this.myForm = this.fb.group({
-      dateOfBirth: new Date('2020-12-20').toISOString().split('T')[0]
+      slelectPatien: [Validators.required],
+      slelectParam: [Validators.required],
+      dateOfPatien: [new Date('2020-12-20').toISOString().split('T')[0], Validators.required]
     });
   }
 
@@ -74,11 +75,11 @@ export class PatientsComponent implements OnInit {
 
   sendReq() {
     console.log(425245245);
-    console.log(this.myForm.value.dateOfBirth);
+    console.log(this.myForm.value.dateOfPatien);
     
-    this.patientsService.getUserMedicalDataByParam(this.patientId, this.param).subscribe(data => {
+    this.patientsService.getUserMedicalDataByParam(this.patientId, this.param,this.myForm.value.dateOfPatien).subscribe(data => {
       console.log(data);
-      this.dateTest = this.myForm.value.dateOfBirth
+      this.dateTest = this.myForm.value.dateOfPatien
       
       
 

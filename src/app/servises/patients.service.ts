@@ -23,8 +23,8 @@ export class PatientsService {
 
   }
 
-  getUserMedicalDataByParam(patientId, param) {
-    return this.http.get(`${environment.apiUrl}/main-data/${patientId}/${param}`)
+  getUserMedicalDataByParam(patientId, param, date) {
+    return this.http.get(`${environment.apiUrl}/main-data/${patientId}/${param}/${date}`)
 
   }
 }

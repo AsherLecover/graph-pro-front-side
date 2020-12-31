@@ -3,33 +3,25 @@
     <h2>In this area you can follow your patients and check their metrics</h2><br><br>
     <h3>Please select the patient you want to see</h3><br>
 
-    <div class="select-area">
 
-        <select (change)="selectPatient($event)" class="select-css">
+        <form class="select-area" [formGroup]="myForm">
+
+        <select   formControlName="slelectPatien" (change)="selectPatient($event)" class="select-css">
             <option> Select patient</option>
             <option *ngFor="let patient of PatientList | async " value={{patient.id}}>{{patient.username}}</option>
 
-        </select>
+        </select><br>
 
-        <select (change)="selectParam($event)" class="select-css">
+        <select  formControlName="slelectParam" (change)="selectParam($event)" class="select-css">
             <option> Select option</option>
             <option *ngFor="let param of madicalsParams">{{param}}</option>
 
-        </select>
+        </select><br>
 
-        <form [formGroup]="myForm">
-            <input  id="date" type="date" formControlName="dateOfBirth">
+        
+            <input  id="date" type="date" formControlName="dateOfPatien">
+            <button [disabled]="!myForm.valid" (click)="sendReq()" type="button" class="btn btn-info">send</button>
         </form>
 
 
-
-
-
-        <button (click)="sendReq()" type="button" class="btn btn-info">send</button>
-
-        <p>{{dateTest}}</p>
-
-
-
-    </div>
 </div>
