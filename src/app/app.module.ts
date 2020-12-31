@@ -9,6 +9,7 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { PatientsComponent } from './components/patients/patients.component';
 
 
 
@@ -20,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     SignInComponent,
     SignUpComponent,
+    PatientsComponent,
     
   ],
   imports: [

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../../servises/auth.service';
 
 
@@ -12,11 +13,14 @@ import { AuthService } from '../../servises/auth.service';
 export class SignInComponent implements OnInit {
   signInForm: FormGroup;
   submitted: boolean;
+  error: string = '';
 
 
   constructor(
     private fb: FormBuilder,
-    private authServise: AuthService
+    private authServise: AuthService,
+    private router: Router,
+
 
   ) { }
 
@@ -31,8 +35,6 @@ export class SignInComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(7687687687687);
-    console.log(this.signInForm.value);
     this.signin()
     
     if (this.signInForm.valid) {
@@ -42,7 +44,17 @@ export class SignInComponent implements OnInit {
 
   signin() {
     this.authServise.signin(this.signInForm.value.email, this.signInForm.value.password).subscribe( data => {
-      console.log(data);
+      console.log('data sgin in::::', data);
+      if(data){
+        this.router.navigate(['/patients'])
+      }
+    },
+    error => {
+      if(error){
+        this.error = ' Check your email and password or sign-in.'
+      }
+      console.log('error', error);
+      
     })
     
     }

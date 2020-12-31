@@ -5,6 +5,7 @@ import {
   FormGroup,
   FormControl,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servises/auth.service';
 
 @Component({
@@ -17,7 +18,11 @@ export class SignUpComponent implements OnInit {
   submitted: boolean;
   errorFromServerEmailExists: string = '';
 
-  constructor(private fb: FormBuilder, private authServise: AuthService) {}
+  constructor(
+    private fb: FormBuilder,
+     private authServise: AuthService,
+     private router: Router,
+     ) {}
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -37,8 +42,6 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(7687687687687);
-    console.log(this.registerForm.value);
 
     if (this.registerForm.valid) {
       this.signup();
@@ -56,8 +59,13 @@ export class SignUpComponent implements OnInit {
       .subscribe(
         (data) => {
           if (this.registerForm.valid) {
+            console.log('data:::', data);
+            
             this.submitted = true;
             console.log('register datails: ', this.registerForm.value);
+            if(data){
+              this.router.navigate(["/sign-in"])
+            }
           }
         },
         (error) => {

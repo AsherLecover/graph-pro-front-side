@@ -70,11 +70,16 @@
           סיסמה חייבת להיות לפחות בעלת אות גדולה אות קטנה ומספר.   
         </span>
       </span>
+
+      <span style="color: red;" *ngIf="error.length > 0">
+        {{error}}
+        <br>
+      </span>
       
       
 
       
-      <input [disabled]="!signInForm.valid" (click)="onSubmit()" type="submit" name="signup_submit" value="Sign me up" />
+      <input [disabled]="!signInForm.valid" (click)="onSubmit()" type="submit" name="signup_submit" value="Sign me in" />
       </form>
     </div>
     
