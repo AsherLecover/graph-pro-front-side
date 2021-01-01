@@ -10,13 +10,26 @@ h3 {
   margin-left: 10%;
 }
 
+.graphs{
+  height: 80vh;
+  
+  /* margin-left: 6%;
+  margin-top: 5%; */
+}
+
 
 
 .select-area {
   display: flex;
   margin-left: 11%;
   justify-content: space-between;
-  width: 40%;
+  width: 55%;
+}
+
+.add-graphs{
+  margin-left: 10%;
+  width: 80%;
+  display: flex;
 }
 
 /* class applies to select element itself, not a wrapper element */

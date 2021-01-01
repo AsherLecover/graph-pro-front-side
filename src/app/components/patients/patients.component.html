@@ -3,25 +3,48 @@
     <h2>In this area you can follow your patients and check their metrics</h2><br><br>
     <h3>Please select the patient you want to see</h3><br>
 
+    <div class="select-area">
 
-        <form class="select-area" [formGroup]="myForm">
-
-        <select   formControlName="slelectPatien" (change)="selectPatient($event)" class="select-css">
+        <form [formGroup]="myForm">
+            <input (click)="chackFormValid($event)" id="date" type="date" formControlName="dateOfPatien">
+        </form>
+        <select (change)="selectPatient($event)" class="select-css">
             <option> Select patient</option>
             <option *ngFor="let patient of PatientList | async " value={{patient.id}}>{{patient.username}}</option>
 
         </select><br>
 
-        <select  formControlName="slelectParam" (change)="selectParam($event)" class="select-css">
-            <option> Select option</option>
+        <select (change)="selectParam($event)" class="select-css">
+            <option> Select param</option>
             <option *ngFor="let param of madicalsParams">{{param}}</option>
 
         </select><br>
+        <button [disabled]="disableBtn" (click)="sendReq()"  class="btn btn-info">show graphs</button>
+    </div><br>
 
-        
-            <input  id="date" type="date" formControlName="dateOfPatien">
-            <button [disabled]="!myForm.valid" (click)="sendReq()" type="button" class="btn btn-info">send</button>
-        </form>
+    <div class="add-graphs">
+        <div>
+            <select (change)="selectParam($event)" class="select-css">
+                <option> Select param</option>
+                <option *ngFor="let param of madicalsParams">{{param}}</option>
+            </select>
+        </div><br>   
+
+        <div>
+            <button type="button" class="btn btn-primary">new param on this graph</button><br>
+        </div><br>
+        <div>
+            <button type="button" class="btn btn-info">new param in new graph</button><br>
+        </div>
+    </div>
+    
+    
+    
+    <div class="graphs">
+        <div #chart></div>
+
+    </div>
+
 
 
 </div>

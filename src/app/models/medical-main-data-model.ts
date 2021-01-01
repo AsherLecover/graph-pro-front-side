@@ -5,7 +5,7 @@ export class MedicalMainDataModel {
     MovementSlow: string; //number
     ObjectDistance: string; //number
     State: string; //number
-    TimeStamp: string; // TimeStamp
+    TimeStamp: any; // TimeStamp
     algorithm_state: string; //string
     average_apnea: string; // number
     cartridge_is_replace: string; // boolean

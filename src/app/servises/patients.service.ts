@@ -18,10 +18,7 @@ export class PatientsService {
     return this.http.get(`${environment.apiUrl}/patients`)
   }
 
-  getUserMedicalData(patientId) {
-    return this.http.get(`${environment.apiUrl}/main-data/${patientId}`)
-
-  }
+  
 
   getUserMedicalDataByParam(patientId, param, date) {
     return this.http.get(`${environment.apiUrl}/main-data/${patientId}/${param}/${date}`)

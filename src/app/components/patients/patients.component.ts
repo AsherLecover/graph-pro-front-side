@@ -1,18 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild, ElementRef , ChangeDetectorRef} from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { PatientsService } from '../../servises/patients.service'
 import { MedicalMainDataModel } from '../../models/medical-main-data-model'
 import { FormBuilder, Validators } from '@angular/forms';
+import * as Plotly from 'plotly.js/dist/plotly.js';
+
+
 
 @Component({
 
   selector: 'patients',
   templateUrl: './patients.component.html',
-  styleUrls: ['./patients.component.css']
+  styleUrls: ['./patients.component.css'],
+
 })
 export class PatientsComponent implements OnInit {
-  PatientList: Observable<any>
+  param: string = '';
 
+  @ViewChild('chart') chart:ElementRef;
+
+  graphData = [{ x: [], y: [], type: 'line' }];
+
+  public graphRpm = {
+    data: this.graphData,
+    layout: { 
+      hovermode:'closest',
+      title:'<br> click on a point to plot an annotation',
+      xaxis:{zeroline:false, title: 'Time'},
+      yaxis:{zeroline:false, title: `${this.param}`}
+   }
+  };
+
+
+
+  PatientList: Observable<any>
   madicalsParams: string[] = [
     'MovementFast',
     'MovementSlow',
@@ -32,13 +53,11 @@ export class PatientsComponent implements OnInit {
     'signal_quality',
     'user_id'
   ];
-  patientId: any;
-  param: any;
+
+  patientId: string = '';
   myForm: any;
   dateTest: any;
-
-
-
+  disableBtn: boolean = true;
 
   constructor(
     private patientsService: PatientsService,
@@ -49,50 +68,56 @@ export class PatientsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.myForm = this.fb.group({
-      slelectPatien: [Validators.required],
-      slelectParam: [Validators.required],
-      dateOfPatien: [new Date('2020-12-20').toISOString().split('T')[0], Validators.required]
+      dateOfPatien: ['', Validators.required]
     });
   }
 
   selectPatient(event: any) {
-    console.log('event:', event.target.value);
-    this.getUserMedicalData(event.target.value)
+    this.patientId = event.target.value;
+    if(this.patientId != '' && this.param != '' && this.myForm.valid){
+      this.disableBtn = false;
+    }
   }
 
-  getUserMedicalData(patientId) {
-    this.patientId = patientId;
-    this.patientsService.getUserMedicalData(patientId).subscribe(data => {
-      console.log('MedicalData:: ', data);
-    })
+  chackFormValid(e){
+    if(this.patientId != '' && this.param != '' && this.myForm.valid){
+      this.disableBtn = false;
+    }
   }
+
+
 
   selectParam(event) {
-    this.param = event.target.value
-    console.log('event:', event.target.value);
+    this.param = event.target.value;
+    console.log(event.target.value);
+    
+    if(this.patientId != '' && this.param != '' && this.myForm.valid){
+      this.disableBtn = false;
+    }
   }
 
   sendReq() {
-    console.log(425245245);
-    console.log(this.myForm.value.dateOfPatien);
-    
-    this.patientsService.getUserMedicalDataByParam(this.patientId, this.param,this.myForm.value.dateOfPatien).subscribe(data => {
-      console.log(data);
-      this.dateTest = this.myForm.value.dateOfPatien
-      
-      
+        const elemenGraph = this.chart.nativeElement;
+          Plotly.newPlot(elemenGraph, this.graphData);
 
+    this.patientsService.getUserMedicalDataByParam(this.patientId, this.param,this.myForm.value.dateOfPatien)
+    .subscribe( (data: MedicalMainDataModel[]) => {
+      data.forEach( e => {
+        this.graphData[0].x.push(e['TimeStamp'])
+        this.graphData[0].y.push(e[this.param.toString()])
+        
+      })
+      Plotly.redraw(elemenGraph, this.graphData);
+      console.log(this.graphData);
+      
+      this.dateTest = this.myForm.value.dateOfPatien;
     })
+
   }
 
-  parseDate(dateString: string): Date {
-    if (dateString) {
-        return new Date(dateString);
-    }
-    return null;
-}
-
+ 
  
 
 }

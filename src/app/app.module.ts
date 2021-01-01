@@ -11,10 +11,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PatientsComponent } from './components/patients/patients.component';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatInputModule } from '@angular/material/input';
-import { MatNativeDateModule } from '@angular/material/core';
+
+import * as PlotlyJS from 'plotly.js/dist/plotly.js';
+import { PlotlyModule } from 'angular-plotly.js';
+
+PlotlyModule.plotlyjs = PlotlyJS;
+
 
 
 
@@ -37,10 +39,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule,
-    MatDatepickerModule,
-    MatInputModule,
-    MatNativeDateModule
+    PlotlyModule
+  
   ],
   providers: [],
   bootstrap: [AppComponent]
