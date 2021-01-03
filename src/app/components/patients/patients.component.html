@@ -1,14 +1,14 @@
 <div class="continer">
     <h1>Dear Medical Doctor Welcome</h1>
     <h2>In this area you can follow your patients and check their metrics</h2><br><br>
-    <h3>Please select the patient you want to see</h3><br>
+    <h3> Please select the patient you want to see</h3><br>
 
     <div class="select-area">
 
         <form [formGroup]="myForm">
             <input (click)="chackFormValid($event)" class="date" type="date" formControlName="dateOfPatien">
         </form>
-        <select (change)="selectPatient($event)" class="select-css">
+        <select  (change)="selectPatient($event)" class="select-css">
             <option> Select patient</option>
             <option *ngFor="let patient of PatientList | async " value={{patient.id}}>{{patient.username}}</option>
 
@@ -22,7 +22,7 @@
         <button [disabled]="disableBtn" (click)="sendReq()"  class="btn btn-info">show graphs</button>
     </div><br>
 
-    <div class="add-graphs">
+    <div *ngIf="showGraphSelected" class="add-graphs">
         <div>
             <select (change)="selectParam($event)" class="select-css">
                 <option> Select param</option>
@@ -31,23 +31,22 @@
         </div><br>   
 
         <div>
-            <button class="select-css" type="button" class="btn btn-primary">new param on this graph</button><br>
+            <button id="a" (click)="sendReqOnExistsGraph()"  type="button" class="btn btn-warning">new param on this graph</button><br>
         </div><br>
         <div>
-            <button class="select-css" type="button" class="btn btn-info">new param in new graph</button><br>
+            <button id="b" (click)="sendReqOnNewGraph()"  type="button" class="btn btn-success">new param in new graph</button><br>
+        </div>
+
+        <div>
+            <button id="b" (click)="clearChars()"  type="button" class="btn btn-danger">clear  chars</button><br>
         </div>
     </div>
 
-    <div id="plotDiv" style="height: 400px; width: 400px;"></div>
-
     
-    
-    
-    <div class="graphs">
-        <div #chart></div>
+    <div  class="graphs">
+        <div id="chart" #chart></div>
+        <div id="chartSecond" #chartSecond></div>
 
     </div>
-
-
-
+    <br><br><br>
 </div>
