@@ -15,11 +15,41 @@ import * as Plotly from 'plotly.js/dist/plotly.js';
 
 })
 export class PatientsComponent implements OnInit {
+   firstPlotTrace = {
+    x: [1,2,3,4],
+    y: [1,2,3,4],
+    type: 'contour',
+    name: 'yaxis data'
+};
+
+ secondPlotTrace = {
+    x: [4,15,26,37],
+    y: [14,25,36,57],
+    mode: 'lines+markers',
+    name: 'yaxis2 data'
+};
+
+ plotData = [this.firstPlotTrace, this.secondPlotTrace];
+
+ layout = {
+    title: 'Double Plot Title',
+    height: 400,
+    width: 400,
+    yaxis: {title: 'Simple Contour Plot Axis', range: [-20, 20]},
+    yaxis2: {title: 'Line and Scatter Plot Axis', range: [-20, 20]}
+};
+
+
   param: string = '';
 
   @ViewChild('chart') chart:ElementRef;
+  @ViewChild('plotDiv') plotDiv:ElementRef;
+
 
   graphData = [{ x: [], y: [], type: 'line' }];
+
+  graphDataTest = [{ x: [1,2,3,4,5], y: [1,2,3,4,5], type: 'line' }];
+
 
   public graphRpm = {
     data: this.graphData,
@@ -68,6 +98,8 @@ export class PatientsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    Plotly.newPlot('plotDiv', this.plotData, this.layout);
+
 
     this.myForm = this.fb.group({
       dateOfPatien: ['', Validators.required]
@@ -100,7 +132,8 @@ export class PatientsComponent implements OnInit {
 
   sendReq() {
         const elemenGraph = this.chart.nativeElement;
-          Plotly.newPlot(elemenGraph, this.graphData);
+        let arr = [this.graphData ,this.graphDataTest]
+          Plotly.newPlot(elemenGraph, this.graphDataTest);
 
     this.patientsService.getUserMedicalDataByParam(this.patientId, this.param,this.myForm.value.dateOfPatien)
     .subscribe( (data: MedicalMainDataModel[]) => {
@@ -109,11 +142,16 @@ export class PatientsComponent implements OnInit {
         this.graphData[0].y.push(e[this.param.toString()])
         
       })
-      Plotly.redraw(elemenGraph, this.graphData);
+      arr = [this.graphData ,this.graphDataTest]
+      Plotly.newPlot(elemenGraph, arr);
       console.log(this.graphData);
       
       this.dateTest = this.myForm.value.dateOfPatien;
     })
+
+  }
+
+  newParamOnThisGraph(){
 
   }
 
