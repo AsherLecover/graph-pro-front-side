@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map, switchMap } from 'rxjs/operators';
+import jwt_decode from 'jwt-decode';
+import { Subject } from 'rxjs';
+
+
 
 
 
@@ -10,6 +14,9 @@ import { map, switchMap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
+
+  username$:Subject<string> =  new Subject;
+  userLoggedIn$:Subject<boolean> =  new Subject;
 
 
   constructor(private http: HttpClient) { }
@@ -35,7 +42,16 @@ export class AuthService {
         console.log('token !!!', token);
         localStorage.setItem('accessToken', token.accessToken); 
         return token
-      } )
+      })
     )
+  }
+
+  getDecodedAccessToken(token: string): any {
+    try{
+        return jwt_decode(token);
+    }
+    catch(Error){
+        return null;
+    }
   }
 }

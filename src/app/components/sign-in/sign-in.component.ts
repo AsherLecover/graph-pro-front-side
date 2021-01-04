@@ -47,6 +47,11 @@ export class SignInComponent implements OnInit {
       console.log('data sgin in::::', data);
       if(data){
         this.router.navigate(['/patients'])
+        console.log(this.authServise.getDecodedAccessToken(localStorage.getItem('accessToken')).username);
+        this.authServise.username$.next(this.authServise.getDecodedAccessToken(localStorage.getItem('accessToken')).username);
+        this.authServise.userLoggedIn$.next(true);
+        
+        
       }
     },
     error => {

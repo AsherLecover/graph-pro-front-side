@@ -1,0 +1,13 @@
+<div style="display: flex;">
+
+    <div  *ngFor="let patient of PatientList | async " class="card" style="width: 18rem; margin-left: 5%; border: black 1px solid;">
+        <img class="card-img-top" src="https://www.w3schools.com/howto/img_avatar.png" width="179px" height="150px" alt="Card image cap">
+        <div class="card-body">
+          <h5  style="text-align: center;font-size: larger; " class="card-title">{{patient.username}}</h5>
+          <h5 style="text-align: center;" >{{patient.age}}</h5>
+          <p  style="text-align: center;" class="card-text">{{patient.address}}</p>
+        </div>
+      </div>
+      <br><br><br>
+</div>
+<br><br><br>

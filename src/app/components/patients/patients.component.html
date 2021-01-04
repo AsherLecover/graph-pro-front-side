@@ -1,7 +1,12 @@
 <div class="continer">
     <h1>Dear Medical Doctor Welcome</h1>
     <h2>In this area you can follow your patients and check their metrics</h2><br><br>
+
+    <button id="btn-show-cards" (click)="PatientCardDetails()"  class="btn btn-success">All Patient Details</button><br><br>
     <h3> Please select the patient you want to see</h3><br>
+
+<!-- ---------------------------------------------------------------- -->
+<patients-details *ngIf="showPatientCardDetails"></patients-details><!-- ---------------------------------------------------------------- -->
 
     <div class="select-area">
 
@@ -37,9 +42,7 @@
             <button id="b" (click)="sendReqOnNewGraph()"  type="button" class="btn btn-success">new param in new graph</button><br>
         </div>
 
-        <div>
-            <button id="b" (click)="clearChars()"  type="button" class="btn btn-danger">clear  chars</button><br>
-        </div>
+        
     </div>
 
     

@@ -12,6 +12,7 @@ import { MedicalMainDataModel } from '../../models/medical-main-data-model';
 import { PatientsModel } from '../../models/patients-model';
 import { FormBuilder, Validators } from '@angular/forms';
 import * as Plotly from 'plotly.js/dist/plotly.js';
+import { PatientsGuardService } from 'src/app/guard/patients-guard.service';
 
 @Component({
   selector: 'patients',
@@ -71,6 +72,7 @@ export class PatientsComponent implements OnInit {
   disableBtn: boolean = true;
   elemenGraph
   showGraphSelected: boolean = false;
+  showPatientCardDetails: boolean = false;
   
   // elemenGraph = this.chart.nativeElement;
 
@@ -78,12 +80,25 @@ export class PatientsComponent implements OnInit {
 
   constructor(
     private patientsService: PatientsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private patientsGuardService: PatientsGuardService
   ) {
     this.PatientList = this.patientsService.getAllPatients();
+    console.log(this.patientsGuardService.canRouteToPatiensPage);
+    
+
+    if(localStorage.getItem('accessToken')){
+      this.patientsGuardService.canRouteToPatiensPage = true;
+      console.log(this.patientsGuardService.canRouteToPatiensPage);
+
+    }
   }
 
   ngOnInit(): void {
+    
+  
+  
+
     this.myForm = this.fb.group({
       dateOfPatien: ['', Validators.required]
     });
@@ -189,8 +204,11 @@ export class PatientsComponent implements OnInit {
       });
   }
 
-  clearChars(){
-    Plotly.deleteTraces(this.elemenGraph, 0);
+  
+  
+
+  PatientCardDetails(){
+    this.showPatientCardDetails = !this.showPatientCardDetails;
   }
 
  

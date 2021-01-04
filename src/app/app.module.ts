@@ -10,10 +10,10 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PatientsComponent } from './components/patients/patients.component';
-
-
 import * as PlotlyJS from 'plotly.js/dist/plotly.js';
 import { PlotlyModule } from 'angular-plotly.js';
+import { PatientsDetailsComponent } from './components/patients-details/patients-details.component';
+import { WorkInProgressComponent } from './components/work-in-progress/work-in-progress.component';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -31,6 +31,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     SignInComponent,
     SignUpComponent,
     PatientsComponent,
+    PatientsDetailsComponent,
+    WorkInProgressComponent,
 
   ],
   imports: [

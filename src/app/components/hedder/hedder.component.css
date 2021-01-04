@@ -10,8 +10,16 @@
     background-position: center center;
     background-image: url(https://raw.githubusercontent.com/AsherLecover/graph-pro-front-side/master/src/assets/backgrong-haeder-img.png);
     transform: translate3d(0px, 0px, 0px);
+ 
+}
 
-    
+.material-icons{
+    color: black;
+}
+
+#welcome-p{
+    color: red;
+    font-size: larger;
 }
 
 .title {
@@ -23,10 +31,7 @@
     margin-left: 10%;
     padding: 5%;
 }
-.bag-icon{
-    margin-right: 5% ; font-size: 35px; cursor: pointer;
 
-}
 
 .private-btn {
     width: 10%;
@@ -41,10 +46,7 @@
     height: 50%;
 }
 
-.mat-toolbar.mat-primary {
-    background: #232d54;
-    color: #fff;
-}
+
 
 .seconeLineMenu {
     justify-content: space-between;
@@ -56,72 +58,13 @@
     display: flex;
 }
 
-::ng-deep .mat-menu-content {
-    background-color: floralwhite
-}
 
-::ng-deep .mat-menu-item {
-    color: #404e88;
-}
 
-button.mat-menu-item:hover {
-    color: red !important;
-}
 
-.mat-dialog-container {
-    background: #fff !important;
-}
 
-.alert-box {
-    position: fixed;
-    top: 45vh;
-    left: 30vw;
-    width: 35vw;
-    padding: 16px;
-    z-index: 100;
-    background: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-    color: #232d54;
-    text-align: center;
-    border: 2px solid rgb(221, 207, 207);
-    border-radius: 25px;
-}
 
-@media screen and (max-width: 900px) {
-    .seconeLineMenu {
-        display: none;
-    }
 
-    .secondeLineHedder{
-        padding-left: 5%;
-    }
-    .title {
-        display: none;
-    }
-    .private-btn {
-        display: none;
-    }
-    .shiping-card-warpper{
-        margin-left: 0vh;
-        display: flex;
-        margin-right: 0vh;
-        padding: 1vh;
-        direction: rtl;
-        padding: 1vh;
-    }
-    .bag-icon{
-        font-size: 4vh;
 
-       
-    }
-    .secondeLineHedder {
-        display: flex;
-        direction: ltr;
 
-    }
-    .firstLineHedder{
-        justify-content: space-between;
-    }
 
         
-}

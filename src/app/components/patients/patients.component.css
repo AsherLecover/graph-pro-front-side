@@ -44,6 +44,10 @@ h3 {
    height: 3.5vh;
 
 }
+
+#btn-show-cards{
+  margin-left: 10%;
+}
  
 
 /* class applies to select element itself, not a wrapper element */
