@@ -3,10 +3,10 @@
     <h2>In this area you can follow your patients and check their metrics</h2><br><br>
 
     <button id="btn-show-cards" (click)="PatientCardDetails()"  class="btn btn-success">All Patient Details</button><br><br>
+    
+    <!-- ---------------------------------------------------------------- -->
+    <patients-details *ngIf="showPatientCardDetails"></patients-details><!-- ---------------------------------------------------------------- -->
     <h3> Please select the patient you want to see</h3><br>
-
-<!-- ---------------------------------------------------------------- -->
-<patients-details *ngIf="showPatientCardDetails"></patients-details><!-- ---------------------------------------------------------------- -->
 
     <div class="select-area">
 
@@ -45,11 +45,11 @@
         
     </div>
 
+
     
-    <div  class="graphs">
+    <div #div class="graphs">
         <div id="chart" #chart></div>
-        <div id="chartSecond" #chartSecond></div>
+        <div id="test" #newCharts></div>
 
     </div>
-    <br><br><br>
 </div>

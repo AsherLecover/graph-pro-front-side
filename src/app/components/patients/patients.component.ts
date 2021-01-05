@@ -13,6 +13,8 @@ import { PatientsModel } from '../../models/patients-model';
 import { FormBuilder, Validators } from '@angular/forms';
 import * as Plotly from 'plotly.js/dist/plotly.js';
 import { PatientsGuardService } from 'src/app/guard/patients-guard.service';
+import * as uuid from 'uuid';
+
 
 @Component({
   selector: 'patients',
@@ -40,7 +42,7 @@ export class PatientsComponent implements OnInit {
 
   @ViewChild('chart') chart: ElementRef;
   @ViewChild('chartSecond') chartSecond: ElementRef;
-  @ViewChild('myDiv') myDiv: ElementRef;
+  @ViewChild('newCharts') newCharts: ElementRef;
 
 
 
@@ -73,8 +75,8 @@ export class PatientsComponent implements OnInit {
   elemenGraph
   showGraphSelected: boolean = false;
   showPatientCardDetails: boolean = false;
+  newDivChart: any;
   
-  // elemenGraph = this.chart.nativeElement;
 
 
 
@@ -160,9 +162,16 @@ export class PatientsComponent implements OnInit {
   }
 
   sendReqOnNewGraph() {
+    this.graphDataSecondGraph[0].x = []
+    this.graphDataSecondGraph[0].y = []
+    const myId = uuid.v4();
+    
+    this.newDivChart =  this.newCharts.nativeElement.insertAdjacentHTML('beforeend', `<div id="${myId}" #chart1></div>`);
+    let elementExists = document.getElementById(myId);
+    
     this.layoutGraph.yaxis.title = this.param;
-    this.elemenGraph = this.chartSecond.nativeElement;
-    Plotly.newPlot(this.elemenGraph, this.graphDataSecondGraph, this.layoutGraph);
+    
+    Plotly.plot(elementExists, this.graphDataSecondGraph, this.layoutGraph);
 
     this.patientsService
       .getUserMedicalDataByParam(
@@ -176,7 +185,7 @@ export class PatientsComponent implements OnInit {
           this.graphDataSecondGraph[0].y.push(e[this.param.toString()]);
           this.graphDataSecondGraph[0].name = this.param;
         });
-        Plotly.redraw(this.elemenGraph, this.graphDataSecondGraph, this.layoutGraph);
+        Plotly.redraw(elementExists, this.graphDataSecondGraph, this.layoutGraph);
         console.log(this.graphDataSecondGraph);
 
       });
@@ -210,10 +219,5 @@ export class PatientsComponent implements OnInit {
   PatientCardDetails(){
     this.showPatientCardDetails = !this.showPatientCardDetails;
   }
-
- 
-
- 
-
 
 }
