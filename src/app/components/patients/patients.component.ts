@@ -41,7 +41,6 @@ export class PatientsComponent implements OnInit {
   param: string = '';
 
   @ViewChild('chart') chart: ElementRef;
-  @ViewChild('chartSecond') chartSecond: ElementRef;
   @ViewChild('newCharts') newCharts: ElementRef;
 
 
